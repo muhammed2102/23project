@@ -16,11 +16,11 @@ function setup() {
 	rectMode(CENTER);
 	
 
-	packageSprite=createSprite(width/2, 80, 10,10);
+	packageSprite=createSprite(2, 80, 10,10);
 	packageSprite.addImage(packageIMG)
 	packageSprite.scale=0.2
 
-	helicopterSprite=createSprite(width/2, 200, 10,10);
+	helicopterSprite=createSprite(-120, 199, 10,10);
 	helicopterSprite.addImage(helicopterIMG)
 	helicopterSprite.scale=0.6
 
@@ -61,6 +61,7 @@ function setup() {
  	boxRightBody = Bodies.rectangle(boxPosition+200-20 , boxY, 20,100 , {isStatic:true} );
  	World.add(world, boxRightBody);
 
+	
 
 	Engine.run(engine);
   
@@ -71,12 +72,22 @@ function draw() {
   rectMode(CENTER);
   background(0);
  
-  packageSprite.x= packageBody.position.x 
+  packageSprite.x= helicopterSprite.x,
   packageSprite.y= packageBody.position.y 
 
   
-  drawSprites();
+	helicopterSprite.x = helicopterSprite.x+5;
+
+	if(keyCode === 40){
+		Matter.Body.setStatic(packageBody,false)
+		packageSprite.x= packageBody.position.x 
+	}
+
+	if(keyCode === 37){
+		helicopterSprite.x = helicopterSprite.x-10;
+		}
   
+  drawSprites();
   
  
 }
